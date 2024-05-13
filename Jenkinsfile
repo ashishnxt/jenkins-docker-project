@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     // Make sure Docker is installed and configured properly on Jenkins
-                    def dockerImage = docker.build("docker.io/ashishnxt/python-jenkins-app:${params.DOCKER_TAG}", "-f Dockerfile .")
+                    def dockerImage = docker.build("docker.io/ashishnxt1127/python-jenkins-app:${params.DOCKER_TAG}", "-f Dockerfile .")
                     docker.withRegistry('', 'mycreds') {
                         dockerImage.push("${params.DOCKER_TAG}")
                     }
@@ -28,7 +28,7 @@ pipeline {
 
         stage('Scan Docker Image for Vulnerabilities') {
             steps {
-                sh "docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.51.1 image docker.io/ashishnxt/python-jenkins-app:${params.DOCKER_TAG}"
+                sh "docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.51.1 image docker.io/ashishnxt1127/python-jenkins-app:${params.DOCKER_TAG}"
             }
         }
     }
