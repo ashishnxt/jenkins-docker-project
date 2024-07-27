@@ -18,7 +18,7 @@ pipeline {
                 script {
                     // Make sure Docker is installed and configured properly on Jenkins
                     def dockerImage = docker.build("docker.io/ashishnxt1127/python-jenkins-app:${params.DOCKER_TAG}", "-f Dockerfile .")
-                    docker.withRegistry('', 'mycreds') {
+                    docker.withRegistry('', 'dockerHub') {
                         dockerImage.push("${params.DOCKER_TAG}")
                     }
                     // You can add any additional build arguments if needed
